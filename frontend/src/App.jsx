@@ -21,7 +21,7 @@ import CoverLetterBuilder from './component/coverletter'
 import AboutPage from './component/aboutus'
 import CareersPage from './component/careerpage'
 import PressPage from './component/presspage'
-kakak
+kakaks
 import HelpCenterPage from './component/helpcentre'
 import JobAlertsPage from './component/smartjob'
 import UserDashboard from './component/userdasboard'
