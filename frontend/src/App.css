@@ -1,0 +1,200 @@
+ 
+        /* Decorative background */
+        .decor-bg {
+          position: fixed;
+          inset: 0;
+          pointer-events: none;
+          z-index: 0;
+          background: repeating-linear-gradient(
+            135deg,
+            #f1f5fd 0px,
+            #f1f5fd 10px,
+            #e0e7ff 10px,
+            #e0e7ff 20px
+          );
+          opacity: 0.35;
+          animation: bgMove 10s linear infinite alternate;
+        }
+        @keyframes bgMove {
+          0% { background-position: 0 0; }
+          100% { background-position: 100px 60px; }
+        }
+
+        /* Card hover/active states */
+        .shadow-lg, .profile-card, .experience-card {
+          transition: box-shadow 0.3s cubic-bezier(.4,2,.1,1), transform 0.25s;
+        }
+        .shadow-lg:hover, .profile-card:hover, .experience-card:hover {
+          box-shadow: 0 12px 40px 0 rgba(99,102,241,0.18),0 2px 4px 0 rgba(0,0,0,0.04);
+          transform: translateY(-2px) scale(1.014);
+          z-index: 1;
+        }
+
+        /* Animated score progress bar */
+        .score-progress {
+          background-image: linear-gradient(
+            90deg, #6366f1 0%, #3b82f6 50%, #22d3ee 100%
+          );
+          box-shadow: 0 0 12px 2px #6366f1bb;
+          background-size: 200% 100%;
+          animation: barstripe 2s linear infinite;
+          transition: width 0.75s cubic-bezier(.4,2,.1,1);
+        }
+        @keyframes barstripe {
+          0% { background-position: 0% 50%; }
+          100% { background-position: 100% 50%; }
+        }
+
+        /* Tab highlight with glowing border */
+        .active-tab {
+          position: relative;
+          z-index: 2;
+          color: #2563eb !important;
+          font-weight: 600;
+          text-shadow: 0 2px 8px #3b82f666;
+        }
+        .active-tab::after {
+          content: '';
+          position: absolute;
+          bottom: -2px;
+          left: 16%;
+          right: 16%;
+          height: 4px;
+          border-radius: 4px;
+          background: linear-gradient(90deg, #6366f1, #818cf8, #06b6d4);
+          box-shadow: 0 0 8px #6366f1cc;
+          animation: tabglow 1.8s linear infinite alternate;
+        }
+        @keyframes tabglow {
+          0% { opacity: 0.5; }
+          100% { opacity: 1; }
+        }
+
+        /* Recommendations: Pulse error/warning, icon wiggle */
+        .recommendation-error, .recommendation-warning {
+          position: relative;
+          overflow: hidden;
+          animation: pulseFade 1.5s infinite alternate;
+        }
+        .recommendation-error::before {
+          content: "";
+          position: absolute;
+          left: -4px; top: 0; bottom: 0; width: 4px;
+          background: linear-gradient(180deg, #ef4444, #f59e0b55);
+          border-radius: 4px;
+          z-index: 0;
+          animation: errorGlow 1.2s infinite alternate;
+        }
+        .recommendation-warning::before {
+          content: "";
+          position: absolute;
+          left: -4px; top: 0; bottom: 0; width: 4px;
+          background: linear-gradient(180deg, #f59e0b, #fbbf24cc);
+          border-radius: 4px;
+          z-index: 0;
+          animation: warnGlow 1.7s infinite alternate;
+        }
+        @keyframes errorGlow {
+          from { box-shadow: 0 0 0px #ef4444; opacity: 0.7; }
+          to { box-shadow: 0 0 12px #ef4444; opacity: 1; }
+        }
+        @keyframes warnGlow {
+          from { box-shadow: 0 0 0px #f59e0b; opacity: 0.7; }
+          to { box-shadow: 0 0 10px #f59e0b; opacity: 1; }
+        }
+        @keyframes pulseFade {
+          from { filter: brightness(1.01); }
+          to { filter: brightness(1.05); }
+        }
+        .recommendation-error:hover, .recommendation-warning:hover {
+          background: #fef2f2;
+          filter: brightness(1.08);
+          transform: scale(1.012);
+        }
+
+        /* Buttons: Ripple effect & scale on click */
+        button:active {
+          transform: scale(0.97);
+          box-shadow: 0 1px 6px #818cf8cc;
+        }
+        button {
+          position: relative;
+          overflow: hidden;
+          outline: none;
+          transition: box-shadow 0.2s, transform 0.2s;
+        }
+        button::after {
+          content: '';
+          display: block;
+          position: absolute;
+          border-radius: 50%;
+          pointer-events: none;
+          left: 50%; top: 50%;
+          width: 0; height: 0;
+          background: rgba(99,102,241,0.18);
+          transform: translate(-50%, -50%);
+          transition: width 0.6s cubic-bezier(.4,2,.1,1), height 0.6s cubic-bezier(.4,2,.1,1);
+          z-index: 0;
+        }
+        button:active::after {
+          width: 200px; height: 200px;
+          transition: 0s;
+        }
+
+        /* Inputs: animated border on focus */
+        .input-field:focus, .textarea-field:focus {
+          border-color: #6366f1;
+          box-shadow: 0 0 0 3px #818cf83f;
+          background: #f0f8ff;
+          transition: border-color 0.25s, box-shadow 0.3s;
+        }
+        .input-field, .textarea-field {
+          transition: border-color 0.25s, box-shadow 0.3s, background 0.2s;
+        }
+
+        /* Particle burst on copy (just as visual feedback) */
+        .copied-flash {
+          position: absolute;
+          top: -10px; right: 20px;
+          font-size: 1.1em;
+          background: #22d3ee;
+          color: white;
+          padding: 2px 10px;
+          border-radius: 10px;
+          filter: drop-shadow(0 2px 6px #22d3eecc);
+          animation: burstOut 0.6s forwards;
+          z-index: 9;
+        }
+        @keyframes burstOut {
+          0% { opacity: 0; transform: scale(0.7) translateY(-12px);}
+          50% { opacity: 1; transform: scale(1.1) translateY(-2px);}
+          100% { opacity: 0; transform: scale(1.4) translateY(-20px);}
+        }
+
+        /* Section hover/lift on preview cards */
+        .preview-card:hover {
+          box-shadow: 0 8px 28px #6366f1aa;
+          transform: translateY(-3px) scale(1.01);
+          background: linear-gradient(96deg, #e0e7ff 0%, #f1f5fd 100%);
+        }
+
+        /* Subtle fade in/out for all animate-fade-in */
+        .animate-fade-in {
+          animation: fadeIn 0.7s cubic-bezier(.4,2,.1,1);
+        }
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(-24px);}
+          to { opacity: 1; transform: translateY(0);}
+        }
+
+        /* Section separator w/ gradient line */
+        .section-sep {
+          width: 100%;
+          height: 3px;
+          border-radius: 2px;
+          background: linear-gradient(90deg, #6366f1 0%, #818cf8 50%, #06b6d4 100%);
+          margin: 32px 0 20px 0;
+          opacity: 0.7;
+          animation: barstripe 2s linear infinite;
+        }
+      
